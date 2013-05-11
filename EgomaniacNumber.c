@@ -29,10 +29,10 @@ int main()
 	long long j;
 	int res[Ceilings];
 	int n;
-	char* buf;
+	char* buf, *bufdef;
 	FILE* fp;
 
-	buf=(char*)malloc(sizeof(char)*0xff);
+	bufdef=buf=(char*)malloc(sizeof(char)*0xff);
 
 	for(i=0; i<Ceilings; i++)
 		res[i]=0;
@@ -46,17 +46,17 @@ int main()
 		fgets(buf, 0xff, fp);
 		if(*buf=='-')
 			fgets(buf, 0xff, fp);
-		fgets(buf, 0xff, fp);
-
-		buf=fgets(buf, 0xff, fp);
+		for(i=0; i<X/2; i++){
+			fgets(buf, 0xff, fp);
+		}
 
 		while(*buf++ == ' ')
 			;
 
-		for(i=0; i<X%2; i++){
-			advance_till_space(buf);
-			while(!isdigit(*buf++))
-				;
+		for(i=0; i<X/2; i++){
+			buf=advance_till_space(buf);
+			while(!isdigit((unsigned char)*buf))
+				buf++;
 		}
 
 		n=atoi(buf);
@@ -65,7 +65,11 @@ int main()
 		for(i=0; i<X/2; i++)
 			fgets(buf, 0xff, fp);
 
+		buf=bufdef;
 	}
+
+	for(i=0; i<Ceilings; i++)
+		printf("%d %d\n", i+1, res[i]);
 
 	free(buf);
 
@@ -74,7 +78,7 @@ int main()
 
 char* advance_till_space(char* buf)
 {
-	while(*buf++!=' ')
+	while(*buf++ != ' ')
 		;
 	return buf;
 }
