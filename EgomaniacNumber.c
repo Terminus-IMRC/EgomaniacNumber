@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <time.h>
 
 #include "defs.h"
 
@@ -31,6 +32,7 @@ int main()
 	int n;
 	char* buf, *bufdef;
 	FILE* fp;
+	double start;
 
 	bufdef=buf=(char*)malloc(sizeof(char)*0xff);
 
@@ -41,6 +43,8 @@ int main()
 	fp=fopen(buf, "r");
 	if(errno)
 		will_and_die(buf, 1);
+
+	start=clock();
 
 	for(j=0; j<ELEM; j++){
 		fgets(buf, 0xff, fp);
@@ -66,6 +70,12 @@ int main()
 			fgets(buf, 0xff, fp);
 
 		buf=bufdef;
+
+		if((clock()-start)/CLOCKS_PER_SEC > 60*60*23.5){
+			puts("Saba-ga-tonda.");
+			printf("Now: %lld", j);
+			break;
+		}
 	}
 
 	for(i=0; i<Ceilings; i++)
