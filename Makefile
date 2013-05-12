@@ -1,7 +1,8 @@
 PROJ=EgomaniacNumber
 
 X=5
-ELEM=475305224
+# BE CAREFUL!
+ELEM=275305224
 
 DEBUGOPT=-g
 WARNOPT=-Wall -Wextra -W -Wundef -Wshadow	\
