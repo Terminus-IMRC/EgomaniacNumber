@@ -78,8 +78,13 @@ int main()
 		}
 	}
 
+	fclose(fp);
+
+	fp=fopen("out.txt", "w");
 	for(i=0; i<Ceilings; i++)
-		printf("%d %d\n", i+1, res[i]);
+		fprintf(fp, "%d %d\n", i+1, res[i]);
+
+	fclose(fp);
 
 	free(buf);
 
