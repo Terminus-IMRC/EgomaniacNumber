@@ -10,7 +10,7 @@ WARNOPT=-Wall -Wextra -W -Wundef -Wshadow	\
 	-fsigned-char -ansi -pedantic -Werror
 OPTOPT=-O0
 
-OBJS=EgomaniacNumber.c.o will_and_die.c.o
+OBJS=EgomaniacNumber.c.o will_and_die.c.o isthetime_came.c.o
 
 DEPS=$(MAKEFILE_LIST)
 
